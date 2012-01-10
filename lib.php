@@ -1,4 +1,7 @@
 <?php
+doc_group('Random');
+
+doc('Устанавливает начальную точку для генератора случайных чисел');
 def('random_seed', function($seed=null){
         static $t = null;
         if(is_null($t))
@@ -8,7 +11,9 @@ def('random_seed', function($seed=null){
                 $t = new mersenne_twister\twister($seed);
         return $t;
 });
-def('random', function($min, $max){
+
+doc('Возвращает случайное число в заданном диапазоне');
+def('random', function($min=0, $max=1){
         if(is_float($min) or is_float($max))
                 return random_seed()->rangereal_open($min, $max);
         return random_seed()->rangeint($min, $max);
